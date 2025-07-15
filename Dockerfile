@@ -27,4 +27,4 @@ COPY --from=builder /app/main .
 EXPOSE 8181
 
 # Run the binary
-CMD ["./main"]
+ENTRYPOINT ["./main"]

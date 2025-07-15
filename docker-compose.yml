@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8181:8181"
+      - 8181:8181
     environment:
-      - GO_ENV=development
+      - PORT=8181
     restart: unless-stopped
     networks:
       - records-go-network
@@ -30,7 +30,6 @@ services:
 
 networks:
   records-go-network:
-    driver: bridge
 
 # Uncomment if using Redis or other services that need persistent storage
 # volumes:
