@@ -24,7 +24,7 @@ WORKDIR /root/
 COPY --from=builder /app/main .
 
 # Expose port 8080 (adjust if your app uses a different port)
-EXPOSE 8181
+EXPOSE 7001
 
 # Run the binary
 ENTRYPOINT ["./main"]
