@@ -1,12 +1,13 @@
 services:
   app:
+    container_name: records-api
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8181:8181
+      - "0:7001"
     environment:
-      - PORT=8181
+      - RECORDS_API_PORT=7001
     restart: unless-stopped
     networks:
       - records-go-network
