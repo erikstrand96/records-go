@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: records
+  labels:
+    app: records
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: records
+  template:
+    metadata:
+      labels:
+        app: records
+    spec:
+      containers:
+        - name: records-deployment
+          image: erikstrand/records:latest
+          ports:
+            - containerPort: 7001
+          env:
+            - name: RECORDS_API_PORT
+              value: "7001"
