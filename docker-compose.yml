@@ -1,6 +1,7 @@
 services:
-  app:
+  records-api:
     container_name: records-api
+    image: records:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,7 +11,7 @@ services:
       - RECORDS_API_PORT=7001
     restart: unless-stopped
     networks:
-      - records-go-network
+      - records-network
     # Add healthcheck to ensure the application is running properly
 #    healthcheck:
 #      test: ["CMD", "wget", "-qO-", "http://localhost:8181/health"]
@@ -30,7 +31,7 @@ services:
   #   restart: unless-stopped
 
 networks:
-  records-go-network:
+  records-network:
 
 # Uncomment if using Redis or other services that need persistent storage
 # volumes:
