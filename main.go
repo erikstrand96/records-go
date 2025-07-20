@@ -12,9 +12,9 @@ import (
 	"records-go/database"
 )
 
-var db *sql.DB
-
 func main() {
+
+	var db *sql.DB
 
 	_, err := os.Stat(".env")
 	if err == nil {
@@ -32,7 +32,7 @@ func main() {
 	defer dbPool.Close()
 
 	connStr := dbPool.Config().ConnString()
-	db, err := sql.Open("pgx", connStr)
+	db, err = sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Could not connect to database: %s", err)
 	}
