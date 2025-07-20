@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"records-go/api"
+	"records-go/database"
 
 	"github.com/joho/godotenv"
 )
@@ -20,6 +21,9 @@ func main() {
 			log.Printf("Error loading .env file. %s", err)
 		}
 	}
+
+	dbPool := database.ManageDatabase()
+	defer dbPool.Close()
 
 	srv := api.CreateServer()
 	fmt.Printf("Server address: %s\n", srv.Addr)
