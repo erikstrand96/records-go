@@ -1,19 +1,11 @@
 # records-go
 
-`records-go` is a simple Go-based HTTP API server template, designed for fast and easy deployment of basic APIs. It demonstrates a modular structure, Docker integration, and basic environment variable configuration.
+Simple Go-based Web API.
 
 ## Features
 
 - Written in Go
-- Modular code structure (API, database, main entry)
-- Loads environment variables using `godotenv`
-- Configurable port via `RECORDS_API_PORT` environment variable
-- Basic HTTP route (`/`) returning "Hello World!"
 - Docker-ready build for containerized deployment
-
-## Usage
-
-The main application spins up an HTTP server, routing requests to the base path (`/`) which responds with a simple message.
 
 ## Installation
 
@@ -31,10 +23,11 @@ The main application spins up an HTTP server, routing requests to the base path 
    ```
 
 2. **Configure Environment**
-   - Create a `.env` file in the project root.
-   - Add a port variable:
+   - Create a `.env` file in the project root with the following variables:
+   
      ```
      RECORDS_API_PORT=
+     RECORDS_DB_CONNECTION=
      ```
 
 3. **Run Locally**
@@ -53,12 +46,9 @@ The main application spins up an HTTP server, routing requests to the base path 
 
 - `main.go` - Application entrypoint
 - `api/` - API routing and server logic
-- `database/` - (Placeholder for database logic)
-- `Dockerfile` - Containerization script
+- `database/` - (Database logic)
+- `Dockerfile`
 
 ## Author
 
 - [erikstrand96](https://github.com/erikstrand96)
-
----
-For questions or contributions, open an issue or PR!
