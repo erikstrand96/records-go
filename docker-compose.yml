@@ -12,27 +12,31 @@ services:
     restart: unless-stopped
     networks:
       - records-network
-    # Add healthcheck to ensure the application is running properly
-#    healthcheck:
-#      test: ["CMD", "wget", "-qO-", "http://localhost:8181/health"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 3
+    depends_on:
+      records-db:
+        condition: service_healthy
 
-  # Optional Redis service (uncomment if needed)
-  # redis:
-  #   image: redis:alpine
-  #   ports:
-  #     - "6379:6379"
-  #   networks:
-  #     - app-network
-  #   volumes:
-  #     - redis-data:/data
-  #   restart: unless-stopped
+  records-db:
+    container_name: records-db
+    image: postgres:17
+    ports:
+      - "5479:5432"
+    environment:
+      - POSTGRES_PASSWORD=Sup3rsecret1337
+    volumes:
+      - records-db-data:/var/lib/postgresql/data
+    networks:
+      records-network:
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 
 networks:
   records-network:
 
-# Uncomment if using Redis or other services that need persistent storage
-# volumes:
-#   redis-data:
+volumes:
+  records-db-data:
+
