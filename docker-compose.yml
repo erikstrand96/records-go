@@ -6,9 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "0:7001"
+      - "7001:7001"
     environment:
       - RECORDS_API_PORT=7001
+      - RECORDS_DB_CONNECTION=postgresql://postgres:Sup3rsecret1337@records-db:5432/records
     restart: unless-stopped
     networks:
       - records-network
