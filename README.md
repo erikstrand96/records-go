@@ -23,12 +23,14 @@ Simple Go-based Web API.
    ```
 
 2. **Configure Environment**
-   - Create a `.env` file in the project root with the following variables:
-   
-     ```
-     RECORDS_API_PORT=
-     RECORDS_DB_CONNECTION=
-     ```
+    - Create a `.env` file in the project root with the following variables:
+
+      ```
+      RECORDS_API_PORT=
+      RECORDS_DB_NAME=
+      RECORDS_DB_PASSWORD=
+      RECORDS_DB_CONNECTION=
+      ```
 
 3. **Run Locally**
    ```bash
