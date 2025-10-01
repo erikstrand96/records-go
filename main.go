@@ -1,15 +1,18 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
-	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/joho/godotenv"
 	"log"
 	"net/http"
 	"os"
 	"records-go/api"
 	"records-go/database"
+
+	"github.com/jackc/pgx/v5/pgxpool"
+	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -25,18 +28,20 @@ func main() {
 		}
 	}
 
-	dbPool, err := database.ManageDatabase()
+	connStr := os.Getenv("RECORDS_DB_CONNECTION")
+	dbPool, err := pgxpool.New(context.Background(), connStr)
 	if err != nil {
 		log.Fatalf("Could not connect to database: %s", err)
 	}
 	defer dbPool.Close()
 
-	connStr := dbPool.Config().ConnString()
 	db, err = sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Could not connect to database: %s", err)
 	}
-	defer db.Close()
+	defer func(db *sql.DB) {
+		_ = db.Close()
+	}(db)
 
 	err = database.ApplyMigrations(db)
 	if err != nil {

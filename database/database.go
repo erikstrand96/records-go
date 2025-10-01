@@ -1,24 +1,12 @@
 package database
 
 import (
-	"context"
 	"database/sql"
 	"embed"
-	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/pressly/goose/v3"
 	"log"
-	"os"
+
+	"github.com/pressly/goose/v3"
 )
-
-func ManageDatabase() (*pgxpool.Pool, error) {
-
-	connStr := os.Getenv("RECORDS_DB_CONNECTION")
-
-	pool, err := pgxpool.New(context.Background(), connStr)
-
-	return pool, err
-
-}
 
 //go:embed migrations/*.sql
 var embedMigrations embed.FS
